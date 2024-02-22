@@ -30,14 +30,14 @@ def map_all_keys():
 
 def map_fn_keys():
     for key in fn_keys:
-        map_key(key, DOWN, fn, DOWN)
-        map_key(key, UP, fn, UP)
+        map_key(key, DOWN, fn)
+        map_key(key, UP, fn)
 
-def map_key(key, keypos, func, arg):
+def map_key(key, keypos, func, arg=None):
     if keypos is DOWN:
-        keyboard.on_press_key(key, lambda e: func(arg), suppress=True)
+        keyboard.on_press_key(key, lambda e: func(keypos if arg is None else arg), suppress=True)
     else:
-        keyboard.on_release_key(key, lambda e: func(arg), suppress=True)
+        keyboard.on_release_key(key, lambda e: func(keypos if arg is None else arg), suppress=True)
 
 map_fn_keys()
 
